@@ -1,0 +1,2 @@
+FROM demo/maven-jdk-8-onbuild
+CMD ["java","-jar","/usr/src/app/target/dockerfile-start-0.1.0.jar"]

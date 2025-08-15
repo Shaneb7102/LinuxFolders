@@ -1,0 +1,30 @@
+version: '3'
+services:
+  redis:
+    image: "redis:alpine"
+    networks:
+        - secure-network
+        - default
+    
+  counter:
+     build: .
+     ports:
+       - "5000:5000"
+     volumes:
+       - /home/ops/courses/docker_fundamentals/compose:/code
+       - /home/ops/courses/docker_fundamentals/compose/data-one:/data
+     links:
+       - redis:kv-datastore
+     networks:
+        - secure-network
+   
+networks:
+  secure-network:
+    driver: bridge
+
+volumes:
+  data-one:
+    
+
+
+

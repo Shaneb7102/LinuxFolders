@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spring-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: message.service
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-service
+                port:
+                  number: 8080
+          - path: /v2/message
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-servicev2
+                port:
+                  number: 8080

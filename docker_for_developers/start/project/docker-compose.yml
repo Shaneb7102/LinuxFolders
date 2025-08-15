@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  producer:
+    build:
+      context: ./producer
+      dockerfile: Dockerfile
+    image: producerimage
+    ports:
+      - "9090:9090"
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile
+    image: consumerimage
+    ports:
+      - "8080:8080"
+    environment:
+      - MESSAGE_PROVIDER_URL=http://producer:9090/message
+      - TRANSLATOR_URL=http://translator:7070/message
+    depends_on:
+      - producer
+  translator:
+    build:
+      context: ./translator
+      dockerfile: Dockerfile
+    image: translatorimage
+    ports:
+      - "7070:7070"

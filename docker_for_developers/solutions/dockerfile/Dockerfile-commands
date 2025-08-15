@@ -1,0 +1,15 @@
+FROM ubuntu
+
+LABEL maintainer="enginer@engineering.com"
+
+ENV VERSION 1.0.0
+
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd
+
+HEALTHCHECK --interval=10s --timeout=1s \
+  CMD exit 1
+
+
